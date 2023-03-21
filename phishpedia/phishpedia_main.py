@@ -45,14 +45,13 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
     print("plot")
     # If no element is reported
     if pred_boxes is None or len(pred_boxes) == 0:
-        print('No element is detected, report as benign')
-#         print('No element is detected, report as benign' + screenshot_path)
-#         with open(DOMAIN_MAP_PATH, 'rb') as handle:
-#             domain_map = pickle.load(handle)
-#         brandName = input("Enter Brand Name: ")
-#         domain = domain_map[brandName]
-#         if tldextract.extract(url).domain not in domain_this:
-#            phish_category = 1
+        print('No element is detected, report as benign' + screenshot_path)
+        with open(DOMAIN_MAP_PATH, 'rb') as handle:
+            domain_map = pickle.load(handle)
+        brandName = input("Enter Brand Name: ")
+        domain = domain_map[brandName]
+        if tldextract.extract(url).domain not in domain_this:
+           phish_category = 1
 #         !+!
 #         if not os.path.exists('Phishpedia_error1.txt'):
 #             with open('Phishpedia_error1.txt', "w+") as f:
@@ -78,14 +77,13 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
                                                                      ts=SIAMESE_THRE)
 
     if pred_target is None:
-        print('Did not match to any brand, report as benign')
-#         print('Did not match to any brand, report as benign' + screenshot_path)
-#         with open(DOMAIN_MAP_PATH, 'rb') as handle:
-#             domain_map = pickle.load(handle)
-#         brandName = input("Enter Brand Name: ")
-#         domain = domain_map[brandName]
-#         if tldextract.extract(url).domain not in domain_this:
-#            phish_category = 1
+        print('Did not match to any brand, report as benign' + screenshot_path)
+        with open(DOMAIN_MAP_PATH, 'rb') as handle:
+            domain_map = pickle.load(handle)
+        brandName = input("Enter Brand Name: ")
+        domain = domain_map[brandName]
+        if tldextract.extract(url).domain not in domain_this:
+           phish_category = 1
 #         !+!
 #         if not os.path.exists('Phishpedia_error1.txt'):
 #             with open('Phishpedia_error1.txt', "w+") as f:
