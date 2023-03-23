@@ -50,7 +50,7 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
             domain_map = pickle.load(handle)
         brandName = input("Enter Brand Name: ")
         domain_this = domain_map[brandName]
-        if (target_this is not None) and (tldextract.extract(url).domain not in domain_this):
+        if (domain_this is not None) and (tldextract.extract(url).domain not in domain_this):
            phish_category = 1
         else:
             print('No element is detected, report as benign')
@@ -84,7 +84,7 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
             domain_map = pickle.load(handle)
         brandName = input("Enter Brand Name: ")
         domain_this = domain_map[brandName]
-        if (target_this is not None) and (tldextract.extract(url).domain not in domain_this):
+        if (domain_this is not None) and (tldextract.extract(url).domain not in domain_this):
            phish_category = 1
         else:
             print('Did not match to any brand, report as benign')
