@@ -31,7 +31,7 @@ def brand_converter(brand_name):
         return 'ADP'
     elif brand_name == 'Amazon.com Inc.' or brand_name == 'Amazon.com Inc':
         return 'Amazon'
-    elif brand_name == 'Americanas.com S,A Comercio Electrnico':
+    elif brand_name == 'Americanas.com S,A Comercio Electrnico' or brand_name == 'Americanas.com S_A Comercio Electrnico':
         return 'Americanas.com S'
     elif brand_name == 'AOL Inc.' or brand_name == 'AOL Inc':
         return 'AOL'
