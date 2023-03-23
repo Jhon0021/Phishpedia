@@ -49,7 +49,8 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
         print('No element is detected' + screenshot_path)
         with open(DOMAIN_MAP_PATH, 'rb') as handle:
             domain_map = pickle.load(handle)
-        brandName = input("Enter Brand Name: ")
+        brandName = screenshot_path.split('/')[-2].split('+')[0]
+        print(brandName)
         try:
             domain_this = domain_map[brandName]
         except Exception:
@@ -88,7 +89,8 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
             domain_map = pickle.load(handle)
         brandName = input("Enter Brand Name: ")
         try:
-            domain_this = domain_map[brandName]
+            brandName = screenshot_path.split('/')[-2].split('+')[0]
+            print(brandName)
         except Exception:
             pass
         if (domain_this is not None) and (tldextract.extract(url).domain not in domain_this):
