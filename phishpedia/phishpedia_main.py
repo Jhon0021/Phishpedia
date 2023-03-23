@@ -3,6 +3,7 @@ import os
 import argparse
 import time
 from .src.util.chrome import *
+from .siamese_pedia.utils import brand_converter
 # import os
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
@@ -49,7 +50,7 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
         print('No element is detected' + screenshot_path)
         with open(DOMAIN_MAP_PATH, 'rb') as handle:
             domain_map = pickle.load(handle)
-        brandName = screenshot_path.split('/')[-2].split('+')[0]
+        brandName =brand_converter(screenshot_path.split('/')[-2].split('+')[0])
         print(brandName)
         try:
             domain_this = domain_map[brandName]
@@ -89,7 +90,7 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
             domain_map = pickle.load(handle)
         brandName = input("Enter Brand Name: ")
         try:
-            brandName = screenshot_path.split('/')[-2].split('+')[0]
+            brandName = brand_converter(screenshot_path.split('/')[-2].split('+')[0])
             print(brandName)
         except Exception:
             pass
