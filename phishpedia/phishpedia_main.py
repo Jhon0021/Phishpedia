@@ -35,6 +35,7 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
     phish_category = 0
     pred_target = None
     siamese_conf = None
+    domain_this = None
     print("Entering phishpedia")
 
     ####################### Step1: layout detector ##############################################
