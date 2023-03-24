@@ -162,7 +162,7 @@ def runit(folder, results, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEATS, L
             plotvis = None 
             siamese_conf = None
             pred_boxes = None
-            vt_result = 0
+            vt_result = 'None'
             print('Find in Whitelist!')
             
         else:
