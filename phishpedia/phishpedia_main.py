@@ -51,7 +51,7 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
         with open(DOMAIN_MAP_PATH, 'rb') as handle:
             domain_map = pickle.load(handle)
 #         brandName =brand_converter(screenshot_path.split('/')[-2].split('+')[0])
-        branName = input('Please input brand name:')
+        brandName = input('Please input brand name:')
         print(brandName)
         try:
             domain_this = domain_map[brandName]
@@ -90,7 +90,7 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
         with open(DOMAIN_MAP_PATH, 'rb') as handle:
             domain_map = pickle.load(handle)
 #         brandName =brand_converter(screenshot_path.split('/')[-2].split('+')[0])
-        branName = input('Please input brand name:')
+        brandName = input('Please input brand name:')
         print(brandName)
         try:
             domain_this = domain_map[brandName]
@@ -162,6 +162,7 @@ def runit(folder, results, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEATS, L
             plotvis = None 
             siamese_conf = None
             pred_boxes = None
+            print('Find in Whitelist!')
             
         else:
             phish_category, phish_target, plotvis, siamese_conf, pred_boxes = test(url=url, screenshot_path=screenshot_path,
