@@ -50,7 +50,8 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
         print('No element is detected' + screenshot_path)
         with open(DOMAIN_MAP_PATH, 'rb') as handle:
             domain_map = pickle.load(handle)
-        brandName =brand_converter(screenshot_path.split('/')[-2].split('+')[0])
+#         brandName =brand_converter(screenshot_path.split('/')[-2].split('+')[0])
+        branName = input('Please input brand name:')
         print(brandName)
         try:
             domain_this = domain_map[brandName]
@@ -88,7 +89,8 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
         print('Did not match to any brand' + screenshot_path)
         with open(DOMAIN_MAP_PATH, 'rb') as handle:
             domain_map = pickle.load(handle)
-        brandName =brand_converter(screenshot_path.split('/')[-2].split('+')[0])
+#         brandName =brand_converter(screenshot_path.split('/')[-2].split('+')[0])
+        branName = input('Please input brand name:')
         print(brandName)
         try:
             domain_this = domain_map[brandName]
@@ -123,6 +125,7 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
 def runit(folder, results, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEATS, LOGO_FILES, DOMAIN_MAP_PATH):
     directory = folder
     results_path = results
+    whiteList = [line.strip() for line in open("/home/tina-spp/media/hd1/tina-spp/Documents/Junhua/Models/Phishpedia_Whitelist.txt", 'r')]
 
     if not os.path.exists(results_path):
         with open(results_path, "w+") as f:
@@ -152,30 +155,38 @@ def runit(folder, results, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEATS, L
             url = open(info_path, encoding='ISO-8859-1').read()
         except:
             url = 'https://www.' + item
+            
+        if tldextract.extract(url).domain in whiteList:
+            phish_category = 0
+            phish_target = None
+            plotvis = None 
+            siamese_conf = None
+            pred_boxes = None
+            
+        else:
+            phish_category, phish_target, plotvis, siamese_conf, pred_boxes = test(url=url, screenshot_path=screenshot_path,
+                                                                                   ELE_MODEL=ELE_MODEL,
+                                                                                   SIAMESE_THRE=SIAMESE_THRE,
+                                                                                   SIAMESE_MODEL=SIAMESE_MODEL,
+                                                                                   LOGO_FEATS=LOGO_FEATS,
+                                                                                   LOGO_FILES=LOGO_FILES,
+                                                                                   DOMAIN_MAP_PATH=DOMAIN_MAP_PATH)
 
-        phish_category, phish_target, plotvis, siamese_conf, pred_boxes = test(url=url, screenshot_path=screenshot_path,
-                                                                               ELE_MODEL=ELE_MODEL,
-                                                                               SIAMESE_THRE=SIAMESE_THRE,
-                                                                               SIAMESE_MODEL=SIAMESE_MODEL,
-                                                                               LOGO_FEATS=LOGO_FEATS,
-                                                                               LOGO_FILES=LOGO_FILES,
-                                                                               DOMAIN_MAP_PATH=DOMAIN_MAP_PATH)
+            # FIXME: call VTScan only when phishpedia report it as phishing
+            vt_result = "None"
+            if phish_target is not None:
+                try:
+                    if vt_scan(url) is not None:
+                        positive, total = vt_scan(url)
+                        print("Positive VT scan!")
+                        vt_result = str(positive) + "/" + str(total)
+                    else:
+                        print("Negative VT scan!")
+                        vt_result = "None"
 
-        # FIXME: call VTScan only when phishpedia report it as phishing
-        vt_result = "None"
-        if phish_target is not None:
-            try:
-                if vt_scan(url) is not None:
-                    positive, total = vt_scan(url)
-                    print("Positive VT scan!")
-                    vt_result = str(positive) + "/" + str(total)
-                else:
-                    print("Negative VT scan!")
-                    vt_result = "None"
-
-            except Exception as e:
-                print('VTScan is not working...')
-                vt_result = "error"
+                except Exception as e:
+                    print('VTScan is not working...')
+                    vt_result = "error"
 
         # write results as well as predicted images
         try:
