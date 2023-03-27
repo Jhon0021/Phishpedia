@@ -52,6 +52,8 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
             domain_map = pickle.load(handle)
 #         brandName =brand_converter(screenshot_path.split('/')[-2].split('+')[0])
         brandName = input('Please input brand name:')
+        if brandName == 'NAN':
+            phish_category = 1
         print(brandName)
         try:
             domain_this = domain_map[brandName]
@@ -91,6 +93,8 @@ def test(url, screenshot_path, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEAT
             domain_map = pickle.load(handle)
 #         brandName =brand_converter(screenshot_path.split('/')[-2].split('+')[0])
         brandName = input('Please input brand name:')
+        if brandName == 'NAN':
+            phish_category = 1
         print(brandName)
         try:
             domain_this = domain_map[brandName]
