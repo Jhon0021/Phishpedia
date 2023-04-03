@@ -160,7 +160,7 @@ def runit(folder, results, ELE_MODEL, SIAMESE_THRE, SIAMESE_MODEL, LOGO_FEATS, L
         except:
             url = 'https://www.' + item
             
-        if tldextract.extract(url).domain in whiteList and ((url.split('/')[2]) == 'sites.google.com'):
+        if tldextract.extract(url).domain in whiteList and ((url.split('/')[2]) != 'sites.google.com'):
             phish_category = 0
             phish_target = None
             plotvis = None 
